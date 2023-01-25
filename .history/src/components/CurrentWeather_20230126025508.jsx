@@ -6,7 +6,7 @@ import Loading from './Loading';
 
 function CurrentWeather(){
 
-    const apiKey = 'b639b95efe2b42fdb40195830222602';
+    const apiKey = b639b95efe2b42fdb40195830222602;
 
     const[city, setCity] = useState();
     const[weatherData, setWeatherData] = useState([]);
