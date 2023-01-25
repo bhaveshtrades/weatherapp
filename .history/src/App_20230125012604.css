@@ -1,0 +1,13 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  background-color: rgb(85, 85, 190);
+}
+
+.currentWeatherDiv, .forecastingDiv{
+  background-color: rgb(188, 188, 245);
+  border-radius: 14px;
+}
