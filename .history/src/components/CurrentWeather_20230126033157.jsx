@@ -6,7 +6,7 @@ import Loading from './Loading';
 
 function CurrentWeather(){
 
-    const apiKey = process.env.REACT_APP_AUTH_TOKEN;
+    const apiKey = process.env.AUTH_TOKEN;
 
     const[city, setCity] = useState();
     const[weatherData, setWeatherData] = useState([]);
