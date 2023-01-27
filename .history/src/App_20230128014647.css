@@ -29,7 +29,8 @@ body{
   background-color: rgb(188, 188, 245, 0.6);
   border-radius: 14px;
   animation-name: opacityAnimation;
-  animation-duration: 1s;
+  animation-duration: 1.5s;
+  animation-timing-function: calc();
 }
 
 ::-webkit-scrollbar{

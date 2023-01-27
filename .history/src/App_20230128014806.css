@@ -30,6 +30,7 @@ body{
   border-radius: 14px;
   animation-name: opacityAnimation;
   animation-duration: 1s;
+  /* animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1); */
 }
 
 ::-webkit-scrollbar{
