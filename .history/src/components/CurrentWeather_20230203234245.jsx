@@ -15,20 +15,21 @@ function CurrentWeather(){
     const[hourlyData, setHourlyData] = useState([]);
     const[loading, setLoading] = useState();
 
-    navigator.geolocation.getCurrentPosition((position)=>{
+    useEffect(()=>{
+      navigator.geolocation.getCurrentPosition((position)=>{
       setLat(position.coords.latitude);
       setLong(position.coords.longitude);
-      });
-      
-    let api2 = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${long}`;
+    })
+    
+    let api2 = `https:/us1.locationiq.com/v1/reverse?key=pk.37c2e0594e6988ea9690b1bf02eb5279&lat=${lat}&lon=${long}&format=json`;
 
+    fetch(api2).then(data => data.json())
+    .then(response => setCity(response.address.city));
 
-    useEffect(()=>{
-      if(lat & long){
-        setLoading(true);
-        fetch(api2).then(data => data.json())
+    setLoading(true);
+    
+        fetch(api).then(data => data.json())
         .then((response)=>{
-        console.log(response);
         if(response.hasOwnProperty('location')){
         setWeatherData([response]);
         setHourlyData([response.forecast.forecastday[0].hour]);
@@ -39,7 +40,7 @@ function CurrentWeather(){
         setLoading(false);
         }
         });
-      }
+
     }, [lat, long])
 
     let api = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}`;
@@ -52,7 +53,6 @@ function CurrentWeather(){
         setLoading(true);
         fetch(api).then(data => data.json())
         .then((response)=>{
-        console.log(response);
         if(response.hasOwnProperty('location')){
         setWeatherData([response]);
         setHourlyData([response.forecast.forecastday[0].hour]);
@@ -91,7 +91,7 @@ function CurrentWeather(){
 
   return(
      <>
-    <Navbar resultProp={getWeather} cityProp={(e)=>{ setCity(e.target.value)}}/>
+    <Navbar resultProp={getWeather} cityProp={(e)=>{setCity(e.target.value)}}/>
     {loading && <Loading/>}
     {weatherData.length !== 0 && !loading && <div className='mt-16 w-4/5 ml-8 h-72 currentWeatherDiv'>
     <h2 className='text-base pl-8 md:pl-16'>{weatherData[0].location.name}, {weatherData[0].location.country}</h2>

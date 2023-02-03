@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import DetailedWeather from './DetailedWeather';
 import Navbar from './Navbar';
 import HourlyForecast from './HourlyForecast';
@@ -8,39 +8,15 @@ function CurrentWeather(){
 
     const apiKey = process.env.REACT_APP_AUTH_TOKEN;
 
+    navigator.geolocation.getCurrentPosition(function(position){
+      console.log(position.coords.latitude);
+      console.log(position.coords.longitude);
+    });
+
     const[city, setCity] = useState();
-    const[lat, setLat] = useState();
-    const[long, setLong] = useState();
     const[weatherData, setWeatherData] = useState([]);
     const[hourlyData, setHourlyData] = useState([]);
     const[loading, setLoading] = useState();
-
-    navigator.geolocation.getCurrentPosition((position)=>{
-      setLat(position.coords.latitude);
-      setLong(position.coords.longitude);
-      });
-      
-    let api2 = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${long}`;
-
-
-    useEffect(()=>{
-      if(lat & long){
-        setLoading(true);
-        fetch(api2).then(data => data.json())
-        .then((response)=>{
-        console.log(response);
-        if(response.hasOwnProperty('location')){
-        setWeatherData([response]);
-        setHourlyData([response.forecast.forecastday[0].hour]);
-        setLoading(false);
-        }else{
-        setWeatherData([]);
-        setHourlyData([]);
-        setLoading(false);
-        }
-        });
-      }
-    }, [lat, long])
 
     let api = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}`;
 
@@ -52,7 +28,6 @@ function CurrentWeather(){
         setLoading(true);
         fetch(api).then(data => data.json())
         .then((response)=>{
-        console.log(response);
         if(response.hasOwnProperty('location')){
         setWeatherData([response]);
         setHourlyData([response.forecast.forecastday[0].hour]);
@@ -82,6 +57,8 @@ function CurrentWeather(){
         return <HourlyForecast key={index} tempProp={element.temp_c} iconProp={element.condition.icon} timeProp={correctTime+timeUnit}/>
      }
 
+     console.log(new Date().getDate());
+
      function filteredForecasting(element){
       if(hourlyData[0].length !== 0){
       return new Date(`${element.time}`).getHours() >= new Date().getHours();
@@ -91,7 +68,7 @@ function CurrentWeather(){
 
   return(
      <>
-    <Navbar resultProp={getWeather} cityProp={(e)=>{ setCity(e.target.value)}}/>
+    <Navbar resultProp={getWeather} cityProp={(e)=>{setCity(e.target.value)}}/>
     {loading && <Loading/>}
     {weatherData.length !== 0 && !loading && <div className='mt-16 w-4/5 ml-8 h-72 currentWeatherDiv'>
     <h2 className='text-base pl-8 md:pl-16'>{weatherData[0].location.name}, {weatherData[0].location.country}</h2>

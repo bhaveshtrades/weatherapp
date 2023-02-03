@@ -9,6 +9,7 @@ function CurrentWeather(){
     const apiKey = process.env.REACT_APP_AUTH_TOKEN;
 
     const[city, setCity] = useState();
+    const[currCity, setCurrCity] = useState();
     const[lat, setLat] = useState();
     const[long, setLong] = useState();
     const[weatherData, setWeatherData] = useState([]);
@@ -16,30 +17,17 @@ function CurrentWeather(){
     const[loading, setLoading] = useState();
 
     navigator.geolocation.getCurrentPosition((position)=>{
-      setLat(position.coords.latitude);
-      setLong(position.coords.longitude);
-      });
-      
-    let api2 = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${long}`;
-
+    setLat(position.coords.latitude);
+    setLong(position.coords.longitude);
+    })
+    
+    let api2 = `https:/eu1.locationiq.com/v1/reverse?key=pk.37c2e0594e6988ea9690b1bf02eb5279&lat=${lat}&lon=${long}&format=json`;
 
     useEffect(()=>{
-      if(lat & long){
-        setLoading(true);
-        fetch(api2).then(data => data.json())
-        .then((response)=>{
-        console.log(response);
-        if(response.hasOwnProperty('location')){
-        setWeatherData([response]);
-        setHourlyData([response.forecast.forecastday[0].hour]);
-        setLoading(false);
-        }else{
-        setWeatherData([]);
-        setHourlyData([]);
-        setLoading(false);
-        }
-        });
-      }
+      fetch(api2).then(data => data.json())
+      .then(response => setCurrCity(response.address.city));
+
+    console.log(currCity);
     }, [lat, long])
 
     let api = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}`;
@@ -52,7 +40,6 @@ function CurrentWeather(){
         setLoading(true);
         fetch(api).then(data => data.json())
         .then((response)=>{
-        console.log(response);
         if(response.hasOwnProperty('location')){
         setWeatherData([response]);
         setHourlyData([response.forecast.forecastday[0].hour]);
