@@ -14,7 +14,7 @@ function CurrentWeather(){
     const[weatherData, setWeatherData] = useState([]);
     const[hourlyData, setHourlyData] = useState([]);
     const[loading, setLoading] = useState();
-    
+
     let api2 = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${long}`;
     
     function intialContent(){
@@ -23,11 +23,8 @@ function CurrentWeather(){
         setLat(position.coords.latitude);
         setLong(position.coords.longitude);
         });
-  
 
-      setLoading(true);
-
-        if(lat & long){
+        // if(lat & long){
         fetch(api2).then(data => data.json())
         .then((response)=>{
         if(response.hasOwnProperty('location')){
@@ -38,12 +35,12 @@ function CurrentWeather(){
         setWeatherData([]);
         setHourlyData([]);
         setLoading(false);
-        }
+        // }
         });
       }
     }
 
-    useEffect(intialContent, [api2]);
+    intialContent();
     
 
     let api = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}`;

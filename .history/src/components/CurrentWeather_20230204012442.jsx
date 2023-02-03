@@ -14,16 +14,22 @@ function CurrentWeather(){
     const[weatherData, setWeatherData] = useState([]);
     const[hourlyData, setHourlyData] = useState([]);
     const[loading, setLoading] = useState();
+
+    navigator.geolocation.getCurrentPosition((position)=>{
+      setLat(position.coords.latitude);
+      setLong(position.coords.longitude);
+      });
+
+
     
     let api2 = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${long}`;
     
     function intialContent(){
 
-      navigator.geolocation.getCurrentPosition((position)=>{
-        setLat(position.coords.latitude);
-        setLong(position.coords.longitude);
-        });
-  
+      // navigator.geolocation.getCurrentPosition((position)=>{
+      //   setLat(position.coords.latitude);
+      //   setLong(position.coords.longitude);
+      //   });
 
       setLoading(true);
 

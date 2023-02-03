@@ -14,6 +14,7 @@ function CurrentWeather(){
     const[weatherData, setWeatherData] = useState([]);
     const[hourlyData, setHourlyData] = useState([]);
     const[loading, setLoading] = useState();
+
     
     let api2 = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${long}`;
     
@@ -43,7 +44,7 @@ function CurrentWeather(){
       }
     }
 
-    useEffect(intialContent, [api2]);
+    useEffect(intialContent, [api2])
     
 
     let api = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}`;

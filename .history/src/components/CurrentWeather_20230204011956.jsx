@@ -14,18 +14,15 @@ function CurrentWeather(){
     const[weatherData, setWeatherData] = useState([]);
     const[hourlyData, setHourlyData] = useState([]);
     const[loading, setLoading] = useState();
-    
+
+    navigator.geolocation.getCurrentPosition((position)=>{
+      setLat(position.coords.latitude);
+      setLong(position.coords.longitude);
+      });
+
     let api2 = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${long}`;
     
     function intialContent(){
-
-      navigator.geolocation.getCurrentPosition((position)=>{
-        setLat(position.coords.latitude);
-        setLong(position.coords.longitude);
-        });
-  
-
-      setLoading(true);
 
         if(lat & long){
         fetch(api2).then(data => data.json())
@@ -43,7 +40,7 @@ function CurrentWeather(){
       }
     }
 
-    useEffect(intialContent, [api2]);
+    intialContent();
     
 
     let api = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}`;
