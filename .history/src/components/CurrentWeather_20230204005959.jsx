@@ -23,8 +23,7 @@ function CurrentWeather(){
     let api2 = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${long}`;
     
     function intialContent(){
-
-        if(lat & long){
+      setLoading(true);
         fetch(api2).then(data => data.json())
         .then((response)=>{
         if(response.hasOwnProperty('location')){
@@ -37,11 +36,9 @@ function CurrentWeather(){
         setLoading(false);
         }
         });
-      }
     }
 
-    useEffect(intialContent, [lat, long, api2]);
-    
+    useEffect(intialContent, [api2]);
 
     let api = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}`;
 
@@ -109,7 +106,7 @@ function CurrentWeather(){
     </div>
     </div>
     </div>}
-    {weatherData.length !== 0 && loading!== true && <div className='w-4/5 ml-8 h-64 pl-8 forecastingDiv md:pl-16'>
+    {weatherData.length !== 0 && !loading && <div className='w-4/5 ml-8 h-64 pl-8 forecastingDiv md:pl-16'>
     <div className='mt-4 w-3/4 h-56 overflow-auto'>
     <h3 className='mt-4 text-lg'>Today's Weather</h3>
     <div className='flex gap-x-12 mt-4 overflow-auto'>

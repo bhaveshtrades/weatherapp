@@ -40,7 +40,7 @@ function CurrentWeather(){
       }
     }
 
-    useEffect(intialContent, [lat, long, api2]);
+    useEffect(intialContent, [api2]);
     
 
     let api = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}`;

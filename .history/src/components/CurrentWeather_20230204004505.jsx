@@ -15,16 +15,20 @@ function CurrentWeather(){
     const[hourlyData, setHourlyData] = useState([]);
     const[loading, setLoading] = useState();
 
-    navigator.geolocation.getCurrentPosition((position)=>{
-      setLat(position.coords.latitude);
-      setLong(position.coords.longitude);
-      });
-
-    let api2 = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${long}`;
     
-    function intialContent(){
 
-        if(lat & long){
+    useEffect(()=>{
+
+      navigator.geolocation.getCurrentPosition((position)=>{
+        setLat(position.coords.latitude);
+        setLong(position.coords.longitude);
+        });
+  
+      let api2 = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${long}`;
+
+      if(lat & long){
+
+        setLoading(true);
         fetch(api2).then(data => data.json())
         .then((response)=>{
         if(response.hasOwnProperty('location')){
@@ -38,10 +42,7 @@ function CurrentWeather(){
         }
         });
       }
-    }
-
-    useEffect(intialContent, [lat, long, api2]);
-    
+    }, [])
 
     let api = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}`;
 
@@ -60,7 +61,7 @@ function CurrentWeather(){
         }else{
         setWeatherData([]);
         setHourlyData([]);
-        setLoading(false)
+        setLoading(false);
         }
         });
       }
@@ -93,7 +94,7 @@ function CurrentWeather(){
      <>
     <Navbar resultProp={getWeather} cityProp={(e)=>{ setCity(e.target.value)}}/>
     {loading && <Loading/>}
-    {weatherData.length !== 0 && loading !== true && <div className='mt-16 w-4/5 ml-8 h-72 currentWeatherDiv'>
+    {weatherData.length !== 0 && !loading && <div className='mt-16 w-4/5 ml-8 h-72 currentWeatherDiv'>
     <h2 className='text-base pl-8 md:pl-16'>{weatherData[0].location.name}, {weatherData[0].location.country}</h2>
     <h4 className='text-sm pl-8 md:pl-16'>{new Date(`${weatherData[0].current.last_updated}`).getDate()} {months[new Date(`${weatherData[0].current.last_updated}`).getMonth()]}, {weekDays[new Date(`${weatherData[0].current.last_updated}`).getDay()]}</h4>
     <div> 
@@ -109,7 +110,7 @@ function CurrentWeather(){
     </div>
     </div>
     </div>}
-    {weatherData.length !== 0 && loading!== true && <div className='w-4/5 ml-8 h-64 pl-8 forecastingDiv md:pl-16'>
+    {weatherData.length !== 0 && !loading && <div className='w-4/5 ml-8 h-64 pl-8 forecastingDiv md:pl-16'>
     <div className='mt-4 w-3/4 h-56 overflow-auto'>
     <h3 className='mt-4 text-lg'>Today's Weather</h3>
     <div className='flex gap-x-12 mt-4 overflow-auto'>

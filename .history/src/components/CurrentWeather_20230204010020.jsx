@@ -23,8 +23,7 @@ function CurrentWeather(){
     let api2 = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${long}`;
     
     function intialContent(){
-
-        if(lat & long){
+      setLoading(true);
         fetch(api2).then(data => data.json())
         .then((response)=>{
         if(response.hasOwnProperty('location')){
@@ -37,11 +36,9 @@ function CurrentWeather(){
         setLoading(false);
         }
         });
-      }
     }
 
-    useEffect(intialContent, [lat, long, api2]);
-    
+    useEffect(intialContent, [api2]);
 
     let api = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}`;
 
