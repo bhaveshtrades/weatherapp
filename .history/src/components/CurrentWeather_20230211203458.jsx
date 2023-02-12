@@ -101,7 +101,7 @@ function CurrentWeather(){
       let date = new Date(`${element.date}`).getDate();
       let month = months[new Date(`${element.date}`).getMonth()];
       let finalDate = `${date} ${month}`;
-      return <DailyForecast key={index} dateProp={finalDate} imgProp={element.day.condition.icon} tempProp={element.day.avgtemp_c} minTempProp={element.day.mintemp_c} maxTempProp={element.day.maxtemp_c}/>
+      return <DailyForecast key={index} dateProp={finalDate} imgProp={element.day.condition.icon} tempProp={element.day.avgtemp_c} minTempProp={element.day.mintemp_c} maxTempProp={element.day.maxtemp_c} conditionProp={element.day.condition.text}/>
     }
 
 
@@ -109,7 +109,7 @@ function CurrentWeather(){
      <>
     <Navbar resultProp={getWeather} cityProp={(e)=>{ setCity(e.target.value)}}/>
     {loading && <Loading/>}
-    {weatherData.length !== 0 && loading !== true && <div className='mt-16 w-5/6 ml-8 h-auto pt-4 pb-4 currentWeatherDiv'>
+    {weatherData.length !== 0 && loading !== true && <div className='mt-16 w-5/6 ml-8 h-72 currentWeatherDiv'>
     <h2 className='text-base pl-8 md:pl-16'>{weatherData[0].location.name}, {weatherData[0].location.country}</h2>
     <h4 className='text-sm pl-8 md:pl-16'>{new Date(`${weatherData[0].current.last_updated}`).getDate()} {months[new Date(`${weatherData[0].current.last_updated}`).getMonth()]}, {weekDays[new Date(`${weatherData[0].current.last_updated}`).getDay()]}</h4>
     <div> 

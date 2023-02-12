@@ -25,22 +25,9 @@ body{
   background-color: rgb(102, 102, 173)!important;
 }
 
-body::-webkit-scrollbar{
-  display: none;
-}
-
 .currentWeatherDiv, .hourlyForecastDiv, .dailyForecastDiv{
   background-color: rgb(188, 188, 245, 0.6);
   border-radius: 14px;
   animation-name: opacityAnimation;
   animation-duration: 1s;
-}
-
-.dailyForecastDiv::-webkit-scrollbar{
-  display: none;
-}
-
-.dailyForecastItem{
-  background-color: rgb(136, 124, 194);
-  border-radius: 14px;
 }

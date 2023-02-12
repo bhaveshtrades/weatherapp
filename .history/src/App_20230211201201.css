@@ -41,6 +41,5 @@ body::-webkit-scrollbar{
 }
 
 .dailyForecastItem{
-  background-color: rgb(136, 124, 194);
-  border-radius: 14px;
+  background-color: purple;
 }

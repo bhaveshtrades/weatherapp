@@ -39,8 +39,3 @@ body::-webkit-scrollbar{
 .dailyForecastDiv::-webkit-scrollbar{
   display: none;
 }
-
-.dailyForecastItem{
-  background-color: rgb(136, 124, 194);
-  border-radius: 14px;
-}

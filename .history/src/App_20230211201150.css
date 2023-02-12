@@ -40,7 +40,6 @@ body::-webkit-scrollbar{
   display: none;
 }
 
-.dailyForecastItem{
-  background-color: rgb(136, 124, 194);
-  border-radius: 14px;
+.dailyFOrecastItem{
+  background-color: purple!important;
 }

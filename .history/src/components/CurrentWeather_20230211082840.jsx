@@ -3,11 +3,11 @@ import DetailedWeather from './DetailedWeather';
 import Navbar from './Navbar';
 import HourlyForecast from './HourlyForecast';
 import Loading from './Loading';
-import DailyForecast from './DailyForecast';
 
 function CurrentWeather(){
 
-   const apiKey = process.env.REACT_APP_API_KEY;
+    const currentAPI = process.env.REACT_APP_AUTH_TOKEN;
+    const dailyForecastKey = process.env.REACT_APP_DAILY_TOKEN
 
     const[city, setCity] = useState();
     const[lat, setLat] = useState();
@@ -15,9 +15,10 @@ function CurrentWeather(){
     const[weatherData, setWeatherData] = useState([]);
     const[hourlyData, setHourlyData] = useState([]);
     const[loading, setLoading] = useState();
-    const[dailyData, setDailyData] = useState();
     
-    let currentLocationAPI = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${long}&days=10`;
+    let currentLocationAPI = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${long}`;
+
+    let dailyForeCastAPI = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=${cnt}&appid={}`
     
     function intialContent(){
 
@@ -35,12 +36,10 @@ function CurrentWeather(){
         if(response.hasOwnProperty('location')){
         setWeatherData([response]);
         setHourlyData([response.forecast.forecastday[0].hour]);
-        setDailyData(response.forecast.forecastday);
         setLoading(false);
         }else{
         setWeatherData([]);
         setHourlyData([]);
-        setDailyData([]);
         setLoading(false);
         }
         });
@@ -50,7 +49,7 @@ function CurrentWeather(){
     useEffect(intialContent, [currentLocationAPI]);
     
 
-    let api = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=10`;
+    let api = `https://api.weatherapi.com/v1/forecast.json?key=${currentAPI}&q=${city}`;
 
     const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -61,14 +60,12 @@ function CurrentWeather(){
         fetch(api).then(data => data.json())
         .then((response)=>{
         if(response.hasOwnProperty('location')){
-        setDailyData(response.forecast.forecastday)
         setWeatherData([response]);
         setHourlyData([response.forecast.forecastday[0].hour]);
         setLoading(false);
         }else{
         setWeatherData([]);
         setHourlyData([]);
-        setDailyData([]);
         setLoading(false)
         }
         });
@@ -97,19 +94,12 @@ function CurrentWeather(){
       }
     }
 
-    function dailyForecastData(element, index){
-      let date = new Date(`${element.date}`).getDate();
-      let month = months[new Date(`${element.date}`).getMonth()];
-      let finalDate = `${date} ${month}`;
-      return <DailyForecast key={index} dateProp={finalDate} imgProp={element.day.condition.icon} tempProp={element.day.avgtemp_c} minTempProp={element.day.mintemp_c} maxTempProp={element.day.maxtemp_c}/>
-    }
-
 
   return(
      <>
     <Navbar resultProp={getWeather} cityProp={(e)=>{ setCity(e.target.value)}}/>
     {loading && <Loading/>}
-    {weatherData.length !== 0 && loading !== true && <div className='mt-16 w-5/6 ml-8 h-auto pt-4 pb-4 currentWeatherDiv'>
+    {weatherData.length !== 0 && loading !== true && <div className='mt-16 w-4/5 ml-8 h-72 currentWeatherDiv'>
     <h2 className='text-base pl-8 md:pl-16'>{weatherData[0].location.name}, {weatherData[0].location.country}</h2>
     <h4 className='text-sm pl-8 md:pl-16'>{new Date(`${weatherData[0].current.last_updated}`).getDate()} {months[new Date(`${weatherData[0].current.last_updated}`).getMonth()]}, {weekDays[new Date(`${weatherData[0].current.last_updated}`).getDay()]}</h4>
     <div> 
@@ -125,17 +115,13 @@ function CurrentWeather(){
     </div>
     </div>
     </div>}
-    {weatherData.length !== 0 && loading!==true && <div className='w-5/6 ml-8 h-64 pl-8 hourlyForecastDiv md:pl-16'>
+    {weatherData.length !== 0 && loading!== true && <div className='w-4/5 ml-8 h-64 pl-8 forecastingDiv md:pl-16'>
     <div className='mt-4 w-3/4 h-56 overflow-auto'>
     <h3 className='mt-4 text-lg'>Today's Weather</h3>
     <div className='flex gap-x-12 mt-4 overflow-auto'>
     {hourlyData[0].filter(filteredForecasting).map(forecastingData)}
     </div>
     </div>
-    </div>}
-    {weatherData.length !== 0 &&  loading!==true && <div className='mt-4 w-5/6 ml-8 h-72 dailyForecastDiv overflow-auto mb-4'>
-    <h3 className='mt-4 text-base pl-8 md:text-lg mb-4'>3-Day Forecast</h3>
-    {dailyData.map(dailyForecastData)}
     </div>}
     </>
   )
