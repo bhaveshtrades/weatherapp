@@ -2,7 +2,7 @@ import React from 'react'
 
 function DetailedWeather({maxTempProp, minTempProp, sunriseProp, windSpeedProp, rainChanceProp, sunsetProp}) {
   return (
-    <div className='grid grid-cols-3 gap-x-4 mt-4 w-5/6 h-max ml-6 detailedWeatherDiv justify-items-center'>
+    <div className='grid grid-cols-3 gap-x-4 mt-4 w-5/6 h-max ml-6 detailedWeatherDiv justify-items-stretch'>
 
         <div>
         <h3 className='text-center text-sm'>{maxTempProp}&#176;</h3>

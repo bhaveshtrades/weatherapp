@@ -22,7 +22,7 @@
 }
 
 body{
-  background-color: #7f7fc9f5!important;
+  background-color: rgb(158, 158, 218)!important;
 }
 
 body::-webkit-scrollbar{
@@ -30,7 +30,7 @@ body::-webkit-scrollbar{
 }
 
 .currentWeatherDiv, .hourlyForecastDiv, .dailyForecastDiv{
-  background-color: rgba(188, 188, 245, 0.6);
+  background-color: rgb(188, 188, 245, 0.6);
   border-radius: 14px;
   animation-name: opacityAnimation;
   animation-duration: 1s;

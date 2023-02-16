@@ -22,7 +22,7 @@
 }
 
 body{
-  background-color: #7f7fc9f5!important;
+  background-color: rgb(102, 102, 173)!important;
 }
 
 body::-webkit-scrollbar{
@@ -30,17 +30,17 @@ body::-webkit-scrollbar{
 }
 
 .currentWeatherDiv, .hourlyForecastDiv, .dailyForecastDiv{
-  background-color: rgba(188, 188, 245, 0.6);
+  background-color: rgb(188, 188, 245, 0.6);
   border-radius: 14px;
   animation-name: opacityAnimation;
   animation-duration: 1s;
 }
 
-.dailyForecastDiv::-webkit-scrollbar, .hourlyForecastFlex::-webkit-scrollbar{
+.dailyForecastDiv::-webkit-scrollbar{
   display: none;
 }
 
-.dailyForecastItem, .hourlyForecastItem, .currentForecastItem, .detailedWeatherDiv{
+.dailyForecastItem, .hourlyForecastItem{
   background-color: rgb(136, 124, 194);
   border-radius: 14px;
 }

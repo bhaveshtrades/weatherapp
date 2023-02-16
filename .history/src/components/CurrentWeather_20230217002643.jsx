@@ -113,9 +113,9 @@ function CurrentWeather(){
     <h2 className='text-base pl-8 md:pl-16'>{weatherData[0].location.name}, {weatherData[0].location.country}</h2>
     <h4 className='text-sm pl-8 md:pl-16'>{new Date(`${weatherData[0].current.last_updated}`).getDate()} {months[new Date(`${weatherData[0].current.last_updated}`).getMonth()]}, {weekDays[new Date(`${weatherData[0].current.last_updated}`).getDay()]}</h4>
     <div> 
-    <div className='flex gap-x-10 w-max h-max ml-16 px-2 py-1 currentForecastItem mt-4 md:ml-28'>
+    <div className='flex gap-x-10 w-max h-max ml-32 px-2 bg-red-500 mt-4'>
     <img className='w-8 h-8' src={`${weatherData[0].current.condition.icon}`} alt='This is a weather Icon'/>
-    <div className='w-auto h-auto'>
+    <div>
     <h4 className='text-base'>{weatherData[0].current.temp_c}&#176;</h4>
     <h4 className='text-base'>{weatherData[0].current.condition.text}</h4>
     </div>

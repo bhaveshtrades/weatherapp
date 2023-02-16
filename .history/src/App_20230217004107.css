@@ -22,7 +22,7 @@
 }
 
 body{
-  background-color: #7f7fc9f5!important;
+  background-color: rgb(130, 130, 222)!important;
 }
 
 body::-webkit-scrollbar{

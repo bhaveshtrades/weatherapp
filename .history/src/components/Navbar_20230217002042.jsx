@@ -5,7 +5,7 @@ function Navbar({resultProp, cityProp}){
   return (
     <>
     <div className='md:flex justify-around'>
-    <h1 className='text-slate-50 font-bold text-4xl mt-12 pl-8 '>Weather App</h1>
+    <h1 className='text-slate-50 font-bold text-2xl mt-12 pl-8 '>Weather App</h1>
     <div className='flex justify-around pl-4 mt-12'>
     <form role="search" onSubmit={resultProp} className='flex gap-x-4'>
         <label htmlFor='cityName' className='text-slate-50 font-bold text-xs mt-2'>Enter City:</label>
