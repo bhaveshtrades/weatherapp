@@ -2,7 +2,7 @@ import React from 'react'
 
 function HourlyForecast({timeProp, iconProp, tempProp}){
   return(
-    <div className='hourlyForecastItem h-auto w-auto px-2 pt-1'>
+    <div className='hourlyForecastItem h-auto w-auto pt-2'>
       <p className='text-center text-sm'>{timeProp}</p>
       <img src={`${iconProp}`} alt='This is a weather icon' className='w-8 h-8'/>
       <p className='text-center text-sm'>{tempProp}</p>

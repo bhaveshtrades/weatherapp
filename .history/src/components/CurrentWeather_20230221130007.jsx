@@ -113,7 +113,7 @@ function CurrentWeather(){
     <h2 className='text-xl pl-8 md:pl-16 md:text-xl'>{weatherData[0].location.name}, {weatherData[0].location.country}</h2>
     <h4 className='text-base pl-8 md:pl-16'>{new Date(`${weatherData[0].current.last_updated}`).getDate()} {months[new Date(`${weatherData[0].current.last_updated}`).getMonth()]}, {weekDays[new Date(`${weatherData[0].current.last_updated}`).getDay()]}</h4>
     <div> 
-    <div className='flex gap-x-10 w-max h-max ml-20 px-2 py-1 currentForecastItem mt-4 md:ml-28'>
+    <div className='flex gap-x-10 w-max h-max ml-16 px-2 py-1 currentForecastItem mt-4 md:ml-28'>
     <img className='w-8 h-8 mt-3' src={`${weatherData[0].current.condition.icon}`} alt='This is a weather Icon'/>
     <div>
     <h4 className='text-base md:text-lg'>{weatherData[0].current.temp_c}&#176;</h4>
@@ -125,16 +125,16 @@ function CurrentWeather(){
     </div>
     </div>
     </div>}
-    {weatherData.length !== 0 && loading!==true && <div className='w-5/6 ml-8 h-64 hourlyForecastDiv'>
+    {weatherData.length !== 0 && loading!==true && <div className='w-5/6 ml-8 h-64 pl-8 hourlyForecastDiv md:pl-16'>
     <div className='mt-4 w-3/4 h-56 overflow-auto'>
-    <h3 className='mt-4 text-lg md:text-xl ml-12'>Today's Weather</h3>
-    <div className='flex gap-x-12 mt-4 overflow-auto hourlyForecastFlex ml-12'>
+    <h3 className='mt-4 text-lg md:text-xl'>Today's Weather</h3>
+    <div className='flex gap-x-12 mt-4 overflow-auto hourlyForecastFlex'>
     {hourlyData[0].filter(filteredForecasting).map(forecastingData)}
     </div>
     </div>
     </div>}
     {weatherData.length !== 0 &&  loading!==true && <div className='mt-4 w-5/6 ml-8 h-78 dailyForecastDiv overflow-auto mb-4'>
-    <h3 className='mt-4 text-base md:text-lg mb-4 ml-12'>3-Day Forecast</h3>
+    <h3 className='mt-4 text-base pl-8 md:text-lg mb-4'>3-Day Forecast</h3>
     {dailyData.map(dailyForecastData)}
     </div>}
     </>

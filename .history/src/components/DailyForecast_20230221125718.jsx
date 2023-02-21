@@ -6,7 +6,7 @@ function DailyForecast({dateProp, imgProp, maxTempProp, tempProp, minTempProp}) 
     <div className='text-sm text-center pt-2 md:text-lg'>
     {dateProp}
     </div>
-    <img className='w-6 h-6 mt-2 md:w-8 md:h-8' src={`${imgProp}`} alt="This is a weather image" /><br />
+    <img className='w-8 h-8 mt-2' src={`${imgProp}`} alt="This is a weather image" /><br />
     <div className='text-sm text-center md:text-lg'>
     {tempProp}&#176;<br />
     <span className='text-xs font-bold md:text-sm'>Temp</span>

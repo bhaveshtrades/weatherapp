@@ -5,27 +5,27 @@ function DetailedWeather({maxTempProp, minTempProp, sunriseProp, windSpeedProp, 
     <div className='grid grid-cols-3 gap-x-4 mt-4 w-5/6 h-max ml-6 detailedWeatherDiv justify-items-center pt-2'>
 
         <div>
-        <h3 className='text-center text-sm md:text-base'>{maxTempProp}&#176;</h3>
+        <h3 className='text-center text-sm bg-green-50'>{maxTempProp}&#176;</h3>
         <p className='text-center text-xs'>High</p>
         </div>
         <div>
-        <h3 className='text-center text-sm md:text-base'>{minTempProp}&#176;</h3>
+        <h3 className='text-center text-sm'>{minTempProp}&#176;</h3>
         <p className='text-center text-xs'>Low</p>
         </div> 
         <div>
-        <h3 className='text-center text-sm md:text-base'>{sunriseProp}</h3>
+        <h3 className='text-center text-sm'>{sunriseProp}</h3>
         <p className='text-center text-xs'>Sunrise</p>
         </div>
         <div>
-        <h3 className='text-center text-sm md:text-base'>{windSpeedProp}kph</h3>
+        <h3 className='text-center text-sm'>{windSpeedProp}kph</h3>
         <p className='text-center text-xs'>Wind</p>
         </div>
         <div>
-        <h3 className='text-center text-sm md:text-base'>{rainChanceProp}%</h3>
+        <h3 className='text-center text-sm'>{rainChanceProp}%</h3>
         <p className='text-center text-xs'>Rain</p>
         </div>
         <div>
-        <h3 className='text-center text-sm md:text-base'>{sunsetProp}</h3>
+        <h3 className='text-center text-sm'>{sunsetProp}</h3>
         <p className='text-center text-xs'>Sunset</p>
         </div>
 
